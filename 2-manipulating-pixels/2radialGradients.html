@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            var c, canvas, centerX, centerY, radius;
+            var borderColor = '#c8c8c8';
+            var innerBorderColor = '#c8c8c8';
+            var handColor = '#666666';
+            window.onload = function() {
+                canvas = document.getElementById('myCanvas');
+                f = canvas.getContext('2d');
+
+                centerX = canvas.width/2;
+                centerY = canvas.height/2;
+                radius = canvas.width/3;
+
+                drawOuterGradient();
+                drawInnerGradient();
+            };
+
+            function drawOuterGradient() {
+                f.beginPath();
+                f.strokeStyle = borderColor;
+                var gradient = f.createRadialGradient(centerX, centerY/1.2, radius, 100, 50, radius/2);
+                gradient.addColorStop(0, '#ccc');
+                gradient.addColorStop(1, '#fff');
+                f.fillStyle = gradient;
+                f.arc(centerX, centerY/1.2, radius, 0, 2 * Math.PI, false);
+                f.fill();
+                f.stroke();
+                f.closePath();
+            }
+
+            function drawInnerGradient() {
+                f.beginPath();
+                var gradient = f.createRadialGradient(centerX, centerY/1.2, radius, 700, 50, radius/4);
+                gradient.addColorStop(0, '#88bfe8');
+                gradient.addColorStop(1, '#fff');
+                f.fillStyle = gradient;
+                f.arc(centerX, centerY/1.2, radius - 10, 0, 2 * Math.PI, false);
+                f.fill();
+                f.strokeStyle = innerBorderColor;
+                f.stroke();
+                f.closePath();
+            }
+
+            function drawText() {
+
+                f.fillStyle = 'white';
+                f.font = '20pt Arial';
+                var text = 'Gradiengs Renderz 5teen times twenty four and a half borgenfluu, the alien flower pot.'
+                var rWidth = f.meatureText(text).width;
+                f.fillText(text, rWidth, canvas.height);
+                f.fill();
+            }
+        </script>
+    </head>
+    <body>
+        
+        <canvas id="myCanvas" width="600" height="600"></canvas>
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function() {
+            var canvas = document.getElementById('myCanvas');
+            var c = canvas.getContext('2d');
+
+            // Drawing a red outlined triangle filled with yellow
+            c.strokeStyle = 'red';
+            c.lineWidth = 3;
+            c.beginPath();
+            c.moveTo(100, 400);
+            c.lineTo(50, 500);
+            c.lineTo(150, 500);
+            c.lineTo(100, 400);
+            c.stroke();
+            c.fillStyle = 'yellow';
+            c.fill();
+
+            };
+    </script>
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="600"></canvas>
+</body>
+</html>

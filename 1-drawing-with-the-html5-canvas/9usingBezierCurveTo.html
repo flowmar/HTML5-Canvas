@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function() {
+            var canvas = document.getElementById('myCanvas');
+            var c = canvas.getContext('2d');
+
+            c.strokeStyle = 'red';
+            c.lineWidth = 2;
+
+            c.beginPath();
+            c.moveTo(50, 50);
+            // c.bezierCurveTo(50, 400, 400, 400, 400, 50);
+            c.bezierCurveTo(300, 400, 400, 400, 400, 50);
+            c.lineTo(50, 50);
+            c.stroke();
+            c.fill();
+
+            };
+    </script>
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="600"></canvas>
+</body>
+</html>

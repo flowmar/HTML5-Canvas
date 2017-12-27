@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function() {
+            var canvas = document.getElementById('myCanvas');
+            var c = canvas.getContext('2d');
+
+            c.strokeStyle = 'red';
+            c.lineWidth = 10;
+            c.beginPath();
+            
+            // Start point
+            c.moveTo(150, 20);
+            c.lineTo(75, 200);
+            c.lineTo(225, 200);
+            c.lineTo(150, 20);
+
+            // lineJoin: the default is 'miter
+            // c.lineJoin = 'miter';
+            // A miter limit of 10 makes the corners stick all the way out like a point
+            // A miter limit of 1, make the corners flat, giving a 'beveled' look to the shape
+            // c.miterLimit = 10;
+
+            // lineCap : changes the way that the lines come together (like at the top of a triangle) the choices are default 'butt', 'round' or 'square'
+            // c.lineCap = 'butt'
+
+            // The closePath() function completes the shape, and the top of the triangle looks how it should
+            c.closePath();
+
+
+
+            c.stroke();
+
+            c.fillStyle = 'yellow';
+            c.fill();
+            };
+    </script>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+</body>
+</html>

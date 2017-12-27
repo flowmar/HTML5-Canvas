@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            var radius = 50;
+            var posY = 70;
+            var posX = radius;
+            var speed = 8;
+            var canvas, f, canvasWidth, canvasHeight;
+            var dir = 1;
+            window.requestAnimFrame = (function(callback) {
+	return window.requestAnimationFrame ||
+	window.webkitRequestAnimationFrame ||
+	window.mozRequestAnimationFrame ||
+	window.oRequestAnimationFrame ||
+	window.msRequestAnimationFrame ||
+	function(callback){
+	window.setTimeout(callback, 1000 / 60);
+};
+})();
+            window.onload = function() {
+            canvas = document.getElementById('myCanvas');
+            canvasWidth = canvas.width;
+            canvasHeight = canvas.height;
+            f = canvas.getContext('2d');
+            // window.setInterval(function() {animate();
+            // }, 60);
+            animate();
+            };
+            
+            function animate(){
+                update();
+                draw();
+                requestAnimFrame(animate);
+            }
+
+            function update() {
+                // Move to the right until we reach the canvas width
+                if (dir > 0) {
+                    dir = (posX < canvasWidth - radius) ? 1: -1;
+                }
+                // Move to the left until we reach 0
+                if (dir < 0) {
+                    dir = (posX > 0 + radius) ? -1: 1;
+                }
+                posX += speed * dir;
+
+            }
+
+            function draw() {
+                f.clearRect(0, 0, canvasWidth, canvasHeight);
+
+                f.fillStyle = 'navy';
+                f.beginPath();
+                f.arc(posX, posY, radius, 0, 2 * Math.PI, false);
+                f.closePath();
+                f.fill();
+            }
+        </script>
+    </head>
+    <body>
+        
+        <canvas id="myCanvas" width="300" height="300"></canvas>
+    </body>
+</html>

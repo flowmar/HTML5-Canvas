@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function() {
+            var canvas = document.getElementById('myCanvas');
+            var c = canvas.getContext('2d');
+
+            c.strokeStyle = 'red';
+            c.lineWidth = 2;
+
+            c.beginPath();
+            c.moveTo(50,50);
+            // c.quadraticCurveTo(50, 500, 500, 50);
+            c.quadraticCurveTo(50, 500, 700, 50);
+            c.stroke();
+            
+            roundedRect(c, 100, 20, 200, 200, 20);
+
+            };
+
+            function roundedRect(c, x, y, width, height, radius) {
+                c.beginPath();
+                c.moveTo(x, y + radius);
+                c.lineTo(x, y + height - radius);
+                c.quadraticCurveTo(x, y + height, x + radius, y + height);
+                c.lineTo(x + width - radius, y + height);
+                c.quadraticCurveTo(x + width, y + height, x + width, y + height - radius);
+                c.lineTo(x + width, y + radius);
+                c.quadraticCurveTo(x + width, y, x + width - radius, y);
+                c.lineTo(x + radius, y);
+                c.quadraticCurveTo(x, y, x, y + radius);
+                c.strokeStyle = 'black';
+                c.lineWidth = 5;
+                c.stroke();
+                c.fillStyle='green';
+                c.fill();
+                
+                
+            }
+    </script>
+</head>
+<body>
+    <canvas id="myCanvas" width="800" height="600"></canvas>
+</body>
+</html>

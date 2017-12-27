@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            window.requestAnimFrame = (function() {
+				return  window.requestAnimationFrame       || 
+						window.webkitRequestAnimationFrame || 
+						window.mozRequestAnimationFrame    || 
+						window.oRequestAnimationFrame      || 
+						window.msRequestAnimationFrame     || 
+						function(/* function */ callback, /* DOMElement */ element){
+							window.setTimeout(callback, 1000 / 60);
+						};
+			})();
+            window.requestTimeout = function(fn, delay) {
+				if( !window.requestAnimationFrame      	&& 
+					!window.webkitRequestAnimationFrame && 
+					!(window.mozRequestAnimationFrame && window.mozCancelRequestAnimationFrame) && // Firefox 5 ships without cancel support
+					!window.oRequestAnimationFrame      && 
+					!window.msRequestAnimationFrame)
+						return window.setTimeout(fn, delay);
+
+				var start = new Date().getTime(),
+					handle = new Object();
+
+				function loop(){
+					var current = new Date().getTime(),
+						delta = current - start;
+
+					delta >= delay ? fn.call() : handle.value = requestAnimFrame(loop);
+				};
+
+				handle.value = requestAnimFrame(loop);
+				return handle;
+			};
+
+            var f, centerX, centerY, radius;
+            var borderColor = '#c8c8c8';
+            var innerBorderColor = '#c8c8c8';
+            var handColor = '#666666';
+
+            window.onload = function() {
+                var canvas = document.getElementById('myCanvas');
+                f = canvas.getContext('2d');
+                centerX = canvas.width/2;
+                centerY = canvas.height/2;
+                radius = canvas.width/3;
+
+                drawClockFace(f);
+                drawHand();
+
+                window.setInterval(function() {drawHand();}, 1000);
+            }
+
+            function drawHand() {
+                var radians = new Date().getSeconds() * Math.PI/30;
+                radians -= 90 * Math.PI/180;
+
+                // clear area
+                f.beginPath();
+                var gradient = f.createRadialGradient(centerX, centerY, radius/1.3, 70, 50, radius/4);
+                gradient.addColorStop(0, '#88bfe8');
+                gradient.addColorStop(1, '#fff');
+                f.fillStyle = gradient;
+                f.arc(centerX, centerY, radius - 10, 0, 2 * Math.PI, false);
+                f.fill();
+                f.strokeStyle = innerBorderColor;
+                f.stroke();
+                f.closePath();
+
+                // Draw second hand
+                f.save();
+                f.beginPath();
+                f.translate(centerX, centerY);
+                f.rotate(radians);
+                f.lineWidth = 2;
+                f.lineCap = 'round';
+                f.moveTo(0,0);
+                f.lineTo(radius - 25, 0);
+                f.strokeStyle = handColor;
+                f.stroke();
+                f.closePath();
+
+                requestTimeout(drawHand, 1000);
+            }
+
+            function drawClockFace(f) {
+                f.beginPath();
+                f.strokeStyle = 'borderColor';
+                f.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                var gradient = f.createRadialGradient(centerX, centerY, radius, 100, 50, radius/2);
+                
+            }
+        </script>
+    </head>
+    <body>
+        
+        <canvas id="myCanvas" width="300" height="300"></canvas>
+    </body>
+</html>

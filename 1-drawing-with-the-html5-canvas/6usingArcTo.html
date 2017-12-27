@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function() {
+            var canvas = document.getElementById('myCanvas');
+            var ctx = canvas.getContext('2d');
+
+            // Using arcTo for rounded corners
+            ctx.strokeStyle = 'red';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            // We need to draw multiple rounded corners and then connect the paths
+            ctx.moveTo(80, 50);
+
+            // arcTo(startX, startY, endX, endY, radius)
+
+            // Top right
+            ctx.arcTo(210, 50, 210, 70, 20);
+
+            // Bottom right
+            ctx.arcTo(210, 200, 160, 200, 20);
+
+            // Bottom left
+            ctx.arcTo(60, 200, 60, 180, 20);
+
+            // Top left
+            ctx.arcTo(60, 50, 100, 50 , 20);
+
+            ctx.stroke();
+            ctx.fillStyle = 'navy';
+            ctx.fill();
+
+            };
+    </script>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="200"></canvas>
+</body>
+</html>

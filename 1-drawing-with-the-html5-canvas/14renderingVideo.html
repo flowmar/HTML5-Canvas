@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            var timerID;
+            window.onload = function() {
+                canvas = document.getElementById('myCanvas');
+                c = canvas.getContext('2d');
+
+                var video = document.getElementById('video');
+
+                video.addEventListener('play', function() {
+                    video.currentTime = 10.0;
+                    timerID = window.setInterval(function() {
+                        c.drawImage(video, 5, 5, 270, 125);
+                    }, 30);
+                });
+
+                video.addEventListener('pause', function() {
+                    stopTimer();
+});
+
+video.addEventListener('ended', function() {
+stopTimer();
+});
+
+            }
+
+            function stopTimer() {
+                window.clearInterval(timerID);
+            }
+        </script>
+    </head>
+    <body>
+        Video:
+        <br>
+        <video id="video" width="270" height="200" controls="true" autoplay="true">
+            <source src="./vid.mp4" type="video/mp4">
+            
+        </video>
+        <br>
+        Canvas:
+        <br>
+        <canvas id="myCanvas" height="200" width="270"></canvas>
+    </body>
+</html>

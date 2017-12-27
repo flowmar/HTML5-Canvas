@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Canvas Chart</title>
+    <script src="scripts/CanvasChart.js" type="text/javascript"></script>
+    <script>
+        window.onload = function() {
+            var chart = new CanvasChart();
+
+            // Set up an object literal containing all the data and settings
+            var dataAndSettings = { 
+                title: "US Population Chart",
+                animatePoints: true,
+                animationSpeed: 20,
+                xLabel:'Year',
+                yLabel: 'Population (millions)',
+                labelFont: '19pt Arial',
+                dataPointFont: '10pt Arial',
+                renderTypes: [chart.renderType.lines, chart.renderType.points],
+                dataPoints: [{ x: '1790', y: 3.9},
+            {x: '1810', y: 7.2}, {x:'1830', y: 12.8}, {x:'1850', y: 23.1}, {x:'1870', y: 36.5}, {x:'1890', y: 62.9}, {x:'1910', y: 92.2}, {x:'1930', y: 123.2}, {x:'1950', y: 151.3}, {x:'1970', y: 203.2}, {x:'1990', y: 248.7}, {x:'2010', y: 308.7}]
+            }
+            // Pass in the element to be rendered to, and pass the dataAndSettings object as well.
+            chart.render('canvas', dataAndSettings)
+        }
+    </script>
+</head>
+<body style="margin-left:50px;margin-top:50px;">
+    <canvas id="canvas" width="800" height="600"></canvas>
+    <div id="overlay" style="display:none;"></div>
+</body>
+</html>

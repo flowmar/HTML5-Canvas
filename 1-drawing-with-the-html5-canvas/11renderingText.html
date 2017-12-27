@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            window.onload = function() {
+                var canvas = document.getElementById('myCanvas');
+                var c = canvas.getContext('2d');
+
+                // c.strokeStyle= 'navy';
+
+                // c.fillStyle='yellow';
+                
+                // var text = "Hello, Marmalade";
+                // c.font = '40pt Arial';
+                // c.fillText(text, 50, 50);
+                // c.strokeText(text, 50, 50);
+
+                var fontSize = 10;
+
+                for (var i=0; i < 25; i+=5) {
+                    var text = 'Canvas Text! ' + fontSize;
+                    c.font = fontSize + 'px Arial';
+                    // This returns the size of the other text
+                    var y = c.measureText(text).width;
+                    c.fillText(text, 10, y);
+                    fontSize += 5;
+                }
+                
+            }
+        </script>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="600" height="600"></canvas>
+    </body>
+</html>

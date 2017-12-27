@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function() {
+            var canvas = document.getElementById('myCanvas');
+            var c = canvas.getContext('2d');
+
+            var scores = [100, 90, 85, 45, 72, 88];
+            var width = 50;
+            var currX = 50;
+            var base = 200;
+            var startX = 0;
+            var startY = 0;
+
+            // Creates 'data points' where the top of each 'bar' should be for the 'scores' data
+            for (var i = 0; i < scores.length; i++) {
+                var x = currX;
+                var y = canvas.height - scores[i];
+
+                // moveTo point
+                if (startX === 0) startX = x;
+                if (startY === 0) startY = y;
+
+                c.beginPath();
+                c.strokeStyle = 'red';
+                c.lineWidth = 1;
+                c.moveTo(startX, startY);
+                c.lineTo(x, y);
+                c.stroke();
+                c.closePath();
+
+                // We need to add on 10 pixels here, so that the center of the next line does not appear drawn in front of the circle
+                startX = currX + 10;
+                startY = y;
+
+
+                c.beginPath();
+                c.fillStyle = 'navy';
+                c.arc(x, y, 10, 0, 2 * Math.PI, false);
+                c.fill();
+                c.closePath();
+
+                currX += width + 10;
+            }
+
+
+
+            };
+    </script>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="200"></canvas>
+</body>
+</html>

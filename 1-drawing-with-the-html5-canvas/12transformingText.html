@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            window.onload = function() {
+                var canvas = document.getElementById('myCanvas');
+                var c = canvas.getContext('2d');
+
+                c.font = '30pt Arial';
+                c.fillText('Regular Text', 100, 50);
+
+                // rotate, translate (transformations of text)
+
+
+                // Use save() to save the context at a certain point
+                c.save();
+
+                // Make whatever transformations you need to
+                c.translate(100, 300);
+                c.rotate(-.5 * Math.PI);
+                var rText = 'Rotated Text';
+                c.fillText(rText, 0, 0);
+
+                // Restore the context back to its previously saved state
+                c.restore();
+                
+
+                // The width is actually the height in this case, because the text is rotated
+                var rWidth = c.measureText(rText).width;
+                c.fillText('Regular Text', 100, rWidth + 120);
+                
+
+
+            }
+        </script>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="600" height="600"></canvas>
+    </body>
+</html>

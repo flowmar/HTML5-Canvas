@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            window.onload = function() {
+                var canvas = document.getElementById('myCanvas');
+                var f = canvas.getContext('2d');
+
+                var sin = Math.sin(Math.PI/20);
+                var cos = Math.cos(Math.PI/20);
+
+                f.translate(canvas.width/1.5, canvas.height/5);
+
+                for (var i=0; i <=40; i++) {
+                    var r = Math.floor(255 * Math.random());
+                    var g = Math.floor(255 * Math.random());
+                    var b = Math.floor(255 * Math.random());
+                    f.fillStyle = 'rgb(' + r + "," + g + "," + b +")";
+                    f.fillRect(0, 0, 50, 50);
+                    f.transform(cos, sin, -sin, cos, 20, 10);
+                }
+            }
+        </script>
+    </head>
+    <body>
+        
+        <canvas id="myCanvas" width="400" height="400"></canvas>
+    </body>
+</html>

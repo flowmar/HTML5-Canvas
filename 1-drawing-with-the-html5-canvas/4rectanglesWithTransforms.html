@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <script>
+        window.onload = function() {
+            var canvas = document.getElementById('myCanvas');
+            var ctx = canvas.getContext('2d');
+
+            // Since we are rendering upside down, the bars will actually be reversed on the page. To account for this, we can use Array.reverse() to flip the order of the data.
+            var scores = [100, 90, 80, 45, 72, 88];
+
+            // This is to account for our rotation! With this method, you don't have to subtract the base from the height of the bar and find the difference
+            scores = scores.reverse();
+            var width = 50;
+            var currX = 0;
+
+            // 375 over, 200 down
+            ctx.translate(375, 200);
+            // rotate canvas 180 degrees
+            // We are going to render from the top, but since we are rotating the canvas 180 degrees, it will look like we are rendering from the bottom
+            ctx.rotate(1 * Math.PI);
+
+            ctx.fillStyle = 'green';
+            for (var i = 0; i < scores.length; i++) {
+                    ctx.fillRect(currX, 0, width, scores[i]);
+                    currX += width + 10;
+            }
+
+            };
+    </script>
+</head>
+<body>
+    <canvas id="myCanvas" width="600" height="400"></canvas>
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            var canvas, c;
+            window.onload = function() {
+                canvas = document.getElementById('myCanvas');
+                c = canvas.getContext('2d');
+
+                var img = new Image();
+                img.onload = function() {
+                    drawImage(img);
+                };
+                img.src = 'Images/HTML5.png';
+
+                var wallpaper = new Image();
+                wallpaper.onload = function() {
+                    // drawWallPaper(wallpaper);
+                };
+                wallpaper.src = 'Images/wallpaper.jpg';
+            }
+
+            function drawImage(img) {
+                var destX = 10;
+                var destY = 20;
+                var destWidth = 212;
+                var destHeight = 212;
+
+                c.drawImage(img, destX, destY, destWidth, destHeight);
+
+                var sourceX = 0;
+                var sourceY = 0;
+                var sourceWidth = 512;
+                var sourceHeight = 110;
+
+                destX = 250;
+                destY = 20;
+                destWidth = 212;
+                destHeight = 50;
+
+                c.drawImage(img, sourceX, sourceY, sourceWidth, sourceHeight, destX, destY, destWidth, destHeight);
+            }
+
+            function drawWallPaper (img) {
+                var pattern = c.createPattern(img, 'repeat');
+                c.fillStyle = pattern;
+                c.rect(50, 50, 400, 300);
+                c.fill();
+            }
+            
+            function showCanvasAsImage() {
+                var dataUrl = canvas.toDataURL();
+                window.open(dataUrl, 'Canvas as Image', 'width=300, height=300');
+            }
+        </script>
+    </head>
+    <body>
+        <button onClick="showCanvasAsImage()">Show Canvas As Image</button>
+        <br>
+        <canvas id="myCanvas" width="600" height="600"></canvas>
+    </body>
+</html>

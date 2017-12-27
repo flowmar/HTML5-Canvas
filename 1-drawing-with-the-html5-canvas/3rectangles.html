@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Rectangles</title>
+
+    <script>
+        window.onload = function() {
+            var canvas = document.getElementById('myCanvas');
+            var ctx = canvas.getContext('2d');
+
+
+            var scores = [100, 90, 80, 45, 72, 88];
+            var width = 50;
+            // Where does the first bar go?
+            var currX = 50;
+            // Where do the bars start from? 
+            var base = 200;
+
+            // Everything in the rectangle is drawn top to bottom instead of bottom to top
+
+            ctx.fillStyle = 'green';
+
+            // Iterating through the scores array, creating a new rectangle (bar) for each one
+            for (let i =0; i < scores.length;i++){
+                var h = scores[i];
+
+                // Since everything is drawn from top to bottom, you want to get the difference between the height of the canvas and the height of the bar, in order to get a bar graph to line up at the x axis
+                ctx.fillRect(currX, canvas.height - h, width, h);
+                currX += width + 10;
+            }
+        }
+    </script>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="400"></canvas>
+</body>
+</html>

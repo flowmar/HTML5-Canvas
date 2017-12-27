@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script>
+            var c, canvas, centerX, centerY, radius;
+            var borderColor = '#c8c8c8';
+            var innerBorderColor = '#c8c8c8';
+            var handColor = '#666666';
+            window.onload = function() {
+                canvas = document.getElementById('myCanvas');
+                f = canvas.getContext('2d');
+
+                f.font = '30pt Arial';
+                // Save current state 'snapshot'
+                f.save();
+                // Move 
+                f.translate(200, 350);
+                f.rotate(-.5*Math.PI);
+                // scale(width, height)
+                f.scale(1.5, 4)
+
+                var rText = "rotated textooo";
+                // 0, 0 here, because we already translated
+                f.fillText(rText, 0, 0);
+                f.restore();
+
+                f.fillRect(250, 100, 200, 100);
+
+            }
+        </script>
+    </head>
+    <body>
+        
+        <canvas id="myCanvas" width="600" height="600"></canvas>
+    </body>
+</html>
